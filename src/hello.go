@@ -17,7 +17,7 @@ func add(i []js.Value) {
 	int1, _ := strconv.Atoi(value1)
 	int2, _ := strconv.Atoi(value2)
 
-	cb.Call("cb", js.Null(), int1+int2)
+	cb.Call("cb", js.Null(), int1+int2+int1)
 }
 
 func registerCallbacks() {

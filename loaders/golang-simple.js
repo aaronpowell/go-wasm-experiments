@@ -1,5 +1,6 @@
-const { readFileSync } = require('fs');
+const { readFileSync, unlinkSync } = require('fs');
 const { join } = require('path');
+const { execFile } = require('child_process');
 
 const wasmExec = readFileSync(join(__dirname, '..', 'loaders', 'wasm_exec.js'));
 
@@ -45,6 +46,38 @@ let proxy = new Proxy(
 export default proxy;
   `;
 
-module.exports = function loader(source) {
-    return wasmExec + proxyBuilder;
+const getGoBin = root => `${root}/bin/go`;
+
+module.exports = function loader() {
+    const cb = this.async();
+
+    let opts = {
+        env: {
+            GOPATH: process.env.GOPATH,
+            GOROOT: process.env.GOROOT,
+            GOOS: 'js',
+            GOARCH: 'wasm'
+        }
+    };
+
+    let goBin = getGoBin(opts.env.GOROOT);
+
+    let outFile = '/tmp/build.wasm';
+
+    const args = ['build', '-o', outFile, this.resourcePath];
+
+    let that = this;
+
+    execFile(goBin, args, opts, (_, err) => {
+        if (err) {
+            cb(err);
+            return;
+        }
+
+        let out = readFileSync(outFile);
+        unlinkSync(outFile);
+        that.emitFile('main.wasm', out);
+
+        cb(null, wasmExec + proxyBuilder);
+    })
 };
