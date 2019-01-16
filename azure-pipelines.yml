@@ -20,3 +20,8 @@ steps:
     sourceFolder: '$(Build.SourcesDirectory)/dist'
     contents: '**' 
     targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: app
