@@ -16,13 +16,6 @@ func add(i ...js.Value) int {
 		ret += val
 	}
 
-	// value1 := i[0].String()
-	// value2 := i[1].String()
-
-	// int1, _ := strconv.Atoi(value1)
-	// int2, _ := strconv.Atoi(value2)
-
-	// return int1 + int2
 	return ret
 }
 
