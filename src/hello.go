@@ -8,20 +8,38 @@ import (
 
 var global = js.Global()
 
-func add(i []js.Value) {
-	value1 := i[0].String()
-	value2 := i[1].String()
+func add(i ...js.Value) int {
+	ret := 0
 
-	cb := i[2]
+	for _, item := range i {
+		val, _ := strconv.Atoi(item.String())
+		ret += val
+	}
 
-	int1, _ := strconv.Atoi(value1)
-	int2, _ := strconv.Atoi(value2)
+	// value1 := i[0].String()
+	// value2 := i[1].String()
 
-	cb.Call("cb", js.Null(), int1+int2+int1)
+	// int1, _ := strconv.Atoi(value1)
+	// int2, _ := strconv.Atoi(value2)
+
+	// return int1 + int2
+	return ret
 }
 
 func registerCallbacks() {
-	js.Global().Set("add", js.NewCallback(add))
+	wrapper := func(fn func(args ...js.Value) int) func(args []js.Value) {
+		return func(args []js.Value) {
+			cb := args[len(args)-1:][0]
+
+			invoker := func(i int) {
+				cb.Call("cb", js.Null(), i)
+			}
+
+			invoker(fn(args[:len(args)-1]...))
+		}
+	}
+
+	global.Set("add", js.NewCallback(wrapper(add)))
 }
 
 func main() {
