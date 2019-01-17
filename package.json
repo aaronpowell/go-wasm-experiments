@@ -4,15 +4,18 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
-    "webpack-dev-server": "^3.1.14",
-    "webpack-cli": "^3.2.1",
-    "webpack": "^4.28.4"
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "@webassemblyjs/ast": "1.8.0",
-    "@webassemblyjs/wasm-edit": "1.8.0",
-    "@webassemblyjs/wasm-opt": "1.8.0",
-    "@webassemblyjs/wasm-parser": "1.8.0"
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
