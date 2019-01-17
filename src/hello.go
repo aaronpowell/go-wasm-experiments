@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 	"syscall/js"
 )
@@ -37,7 +36,7 @@ func registerCallbacks() {
 
 func main() {
 	c := make(chan struct{}, 0)
-	fmt.Println("Hello, WebAssembly!")
+	println("Web Assembly is ready")
 	registerCallbacks()
 
 	<-c
