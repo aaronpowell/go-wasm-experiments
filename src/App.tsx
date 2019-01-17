@@ -29,11 +29,11 @@ class App extends React.Component<{}, State> {
     render() {
         return (
             <div>
-                <p>Enter a number in the box below, on change it will add all the numbers together. Click the <code>+</code> button to add more input boxes.</p>
+                <p>Enter a number in the box below, on change it will add all the numbers together. Click the button to add more input boxes.</p>
                 {this.state.value.map((value, index) =>
                     <NumberInput value={value} onChange={i => this.updateValue(index, i)} />
                 )}
-                <button type="button" onClick={() => this.setState({ value: [...this.state.value, 0]})}>+</button>
+                <button type="button" onClick={() => this.setState({ value: [...this.state.value, 0]})}>More inputs!</button>
                 <p>Value now is {this.state.result}</p>
             </div>
         );
