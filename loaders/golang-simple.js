@@ -27,10 +27,8 @@ let proxy = new Proxy(
       return (...args) => {
         return new Promise(async (resolve, reject) => {
           let run = () => {
-            let handler = {
-              cb: (err, ...msg) => (err ? reject(err) : resolve(...msg))
-            };
-            window[key].apply(undefined, [...args, handler]);
+            let cb = (err, ...msg) => (err ? reject(err) : resolve(...msg));
+            window[key].apply(undefined, [...args, cb]);
           };
 
           while (!ready) {

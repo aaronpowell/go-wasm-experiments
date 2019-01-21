@@ -24,7 +24,7 @@ func registerCallbacks() {
 			cb := args[len(args)-1:][0]
 
 			invoker := func(i int) {
-				cb.Call("cb", js.Null(), i)
+				cb.Invoke(js.Null(), i)
 			}
 
 			invoker(fn(args[:len(args)-1]...))

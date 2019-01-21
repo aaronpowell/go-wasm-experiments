@@ -31,7 +31,7 @@ class App extends React.Component<{}, State> {
             <div>
                 <p>Enter a number in the box below, on change it will add all the numbers together. Click the button to add more input boxes.</p>
                 {this.state.value.map((value, index) =>
-                    <NumberInput value={value} onChange={i => this.updateValue(index, i)} />
+                    <NumberInput key={index} value={value} onChange={i => this.updateValue(index, i)} />
                 )}
                 <button type="button" onClick={() => this.setState({ value: [...this.state.value, 0]})}>More inputs!</button>
                 <p>Value now is {this.state.result}</p>
