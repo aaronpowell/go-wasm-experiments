@@ -7,7 +7,7 @@ import (
 
 var global = js.Global()
 
-func add(i ...js.Value) int {
+func add(i ...js.Value) js.Value {
 	ret := 0
 
 	for _, item := range i {
@@ -15,19 +15,17 @@ func add(i ...js.Value) int {
 		ret += val
 	}
 
-	return ret
+	return js.ValueOf(ret)
 }
 
 func registerCallbacks() {
-	wrapper := func(fn func(args ...js.Value) int) func(args []js.Value) {
+	wrapper := func(fn func(args ...js.Value) js.Value) func(args []js.Value) {
 		return func(args []js.Value) {
 			cb := args[len(args)-1:][0]
 
-			invoker := func(i int) {
-				cb.Invoke(js.Null(), i)
-			}
+			ret := fn(args[:len(args)-1]...)
 
-			invoker(fn(args[:len(args)-1]...))
+			cb.Invoke(js.Null(), ret)
 		}
 	}
 
