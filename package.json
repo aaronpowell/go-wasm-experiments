@@ -6,6 +6,7 @@
   "dependencies": {
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
+    "loader-utils": "^1.2.3",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },

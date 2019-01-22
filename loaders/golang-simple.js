@@ -2,8 +2,6 @@ const { readFileSync, unlinkSync } = require('fs');
 const { join } = require('path');
 const { execFile } = require('child_process');
 
-const wasmExec = readFileSync(join(__dirname, '..', 'loaders', 'wasm_exec.js'));
-
 const proxyBuilder = `
 let ready = false;
 
@@ -76,6 +74,6 @@ module.exports = function loader() {
         unlinkSync(outFile);
         that.emitFile('main.wasm', out);
 
-        cb(null, wasmExec + proxyBuilder);
+        cb(null, 'require(\'!' + join(__dirname, '..', 'loaders', 'wasm_exec.js') + '\');' + proxyBuilder);
     })
 };
