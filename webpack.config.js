@@ -1,5 +1,7 @@
 const path = require('path');
 
+console.log({ GOPATH: process.env.GOPATH });
+
 module.exports = {
     entry: './src/index.tsx',
     mode: 'development',
