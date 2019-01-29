@@ -15,10 +15,8 @@ steps:
   displayName: 'install gobridge'
 
 - script: |
-    GOPATH=$(go env GOPATH)
-    GOROOT=$(go env GOROOT)
     npm install
-    npm run build
+    GOPATH=$(go env GOPATH) GOROOT=$(go env GOROOT) npm run build
   displayName: 'npm install, run webpack'
 
 - task: CopyFiles@2
