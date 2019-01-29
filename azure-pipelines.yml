@@ -11,7 +11,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    go get "github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
+    GOOS=js GOARCH=wasm go get "github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
   displayName: 'install gobridge'
 
 - script: |
