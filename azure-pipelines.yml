@@ -13,6 +13,7 @@ steps:
 - script: |
     GOOS=js GOARCH=wasm go get "github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
     go env
+    echo $GOPATH
   displayName: 'install gobridge'
 
 - script: |
