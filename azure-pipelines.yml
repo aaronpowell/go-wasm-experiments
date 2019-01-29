@@ -18,7 +18,7 @@ steps:
     GOPATH=$(go env GOPATH)
     GOROOT=$(go env GOROOT)
     npm install
-    npx webpack --config webpack.config.js
+    npm run build
   displayName: 'npm install, run webpack'
 
 - task: CopyFiles@2
