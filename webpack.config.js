@@ -29,15 +29,7 @@ module.exports = {
             },
             {
                 test: /\.go/,
-                use: [
-                    {
-                        loader: path.join(
-                            __dirname,
-                            'loaders',
-                            'golang-simple.js'
-                        )
-                    }
-                ]
+                use: 'golang-wasm-async-loader'
             },
             {
                 test: /\.css$/,

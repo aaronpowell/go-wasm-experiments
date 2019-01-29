@@ -3,6 +3,8 @@ package main
 import (
 	"strconv"
 	"syscall/js"
+
+	"github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
 )
 
 var global = js.Global()
@@ -18,24 +20,9 @@ func add(i ...js.Value) js.Value {
 	return js.ValueOf(ret)
 }
 
-func registerCallbacks() {
-	wrapper := func(fn func(args ...js.Value) js.Value) func(args []js.Value) {
-		return func(args []js.Value) {
-			cb := args[len(args)-1:][0]
-
-			ret := fn(args[:len(args)-1]...)
-
-			cb.Invoke(js.Null(), ret)
-		}
-	}
-
-	global.Set("add", js.NewCallback(wrapper(add)))
-}
-
 func main() {
 	c := make(chan struct{}, 0)
 	println("Web Assembly is ready")
-	registerCallbacks()
-
+	gobridge.RegisterCallback("add", add)
 	<-c
 }
