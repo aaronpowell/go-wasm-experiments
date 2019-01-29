@@ -7,8 +7,6 @@ import (
 	"github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
 )
 
-var global = js.Global()
-
 func add(i ...js.Value) js.Value {
 	ret := 0
 
